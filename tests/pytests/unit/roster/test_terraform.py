@@ -178,7 +178,7 @@ def test_specified_priv(pki_dir, roster_file_priv):
             "user": "root",
             "passwd": "linux",
             "timeout": 22,
-            "priv": "path/to/customkey.rsa",
+            "priv": "tests/pytests/unit/roster/terraform.data/ssh/salt-ssh-custom.rsa",
         },
     }
 
