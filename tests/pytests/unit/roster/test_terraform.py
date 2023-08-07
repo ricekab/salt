@@ -154,6 +154,35 @@ def test_defaults_new_matching(pki_dir, roster_file_new):
         assert expected_result == ret
 
 
+def test_specified_priv(pki_dir, roster_file_new):
+    """
+    Test the output of a fixture tfstate file which contains libvirt
+    resources using matching
+    """
+    expected_result = {
+        "web0": {
+            "host": "192.168.122.106",
+            "user": "root",
+            "passwd": "linux",
+            "timeout": 22,
+            "priv": str(pki_dir / "ssh" / "salt-ssh-specified.rsa"),
+        },
+        "web1": {
+            "host": "192.168.122.107",
+            "user": "root",
+            "passwd": "linux",
+            "timeout": 22,
+            "priv": str(pki_dir / "ssh" / "salt-ssh-specified.rsa"),
+        },
+    }
+
+    with patch.dict(terraform.__opts__, {
+            "roster_file": str(roster_file_new),
+            "priv": str(pki_dir / "ssh" / "salt-ssh-specified.rsa")
+            }):
+        ret = terraform.targets("*")
+        assert expected_result == ret
+
 def test_correct_handler_called_old():
     old_mock = patch.object(terraform, "_do__parse_old_state_file")
     new_mock = patch.object(terraform, "_do_parse_new_state_file")
