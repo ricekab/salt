@@ -178,7 +178,7 @@ def test_specified_priv(pki_dir, roster_file_priv):
             "user": "root",
             "passwd": "linux",
             "timeout": 22,
-            "priv": str(pki_dir / "ssh" / "salt-ssh-specified.rsa"),
+            "priv": "path/to/customkey.rsa",
         },
     }
 
