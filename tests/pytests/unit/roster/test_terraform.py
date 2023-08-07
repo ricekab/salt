@@ -160,7 +160,7 @@ def test_defaults_new_matching(pki_dir, roster_file_new):
         assert expected_result == ret
 
 
-def test_specified_priv(pki_dir, roster_file_new):
+def test_specified_priv(pki_dir, roster_file_priv):
     """
     Test the output of a fixture tfstate file which contains libvirt
     resources using matching
@@ -185,6 +185,7 @@ def test_specified_priv(pki_dir, roster_file_new):
     with patch.dict(terraform.__opts__, {"roster_file": str(roster_file_priv)}):
         ret = terraform.targets("*")
         assert expected_result == ret
+
 
 def test_correct_handler_called_old():
     old_mock = patch.object(terraform, "_do__parse_old_state_file")
